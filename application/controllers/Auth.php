@@ -6,9 +6,11 @@ class Auth extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
-        $this->load->helper('url');
+        $this->load->helper('url','form');
+        $this->load->library('form_validation');
         $this->load->library('session');
         $this->load->model('User');
+        $this->load->model('Level');
     }
 
 	private function verify_admin_level(){
@@ -19,6 +21,33 @@ class Auth extends CI_Controller {
 	{
 		$this->load->view('Auth/index');
 	}
+
+	public function signin()
+	{
+		$levels = $this->Level->All();
+		$this->load->view('Auth/signin', ['Levels'=> $levels]);
+	}
+
+	public function create()
+    {
+		// $this->form_validation->set_rules('password', 'current password', 'max_length[25]|min_length[5]|required');
+		// $this->form_validation->set_rules('new_password', 'new password', 'max_length[25]|min_length[5]|required|differs[password]');
+		// $this->form_validation->set_rules('confirm_password', 'confirm password', 'required|max_length[25]|min_length[5]|matches[new_password]');
+		
+		$this->form_validation->set_message('pass', 'Password', 'max_length[25]|min_length[5]|required');
+		$this->form_validation->set_message('confirm_pass', 'Confirm Password', 'required|max_length[25]|min_length[5]|matches[pass]');
+        
+        if(!empty($_POST)){
+            if($this->form_validation->run() == TRUE){ //$this->User->Exists($_POST['account'])
+                var_dump($this->form_validation->run());
+                //$_POST['pass'] = md5($_POST['pass']);
+            	//$this->User->Add($_POST);       
+            }else{
+            	$this->load->view('Auth/signin', ['Error' => 'Ya existe una cuenta con este usuario.']);
+            }
+            //redirect(base_url('Auth'));
+        }
+    }
 
 	public function login()
 	{
@@ -45,7 +74,7 @@ class Auth extends CI_Controller {
         }
 	}
 
-	public function logout() 
+	public function logout()
 	{
       $usuario_data = array(
          'islogin' => FALSE

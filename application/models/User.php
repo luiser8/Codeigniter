@@ -9,15 +9,15 @@ class User extends CI_Model
         $this->load->database();
     }
     
-    function Add($user)
+    public function Add($user)
     {
         $this->db->insert('users', $user);
     }
     
-    function Exists($user)
+    public function Exists($user)
     {
         $is_unique;
-        $query = $this->db->where('email', $user)->get('users');
+        $query = $this->db->where('account', $user)->get('users');
         if($query->num_rows() > 0){
             return $is_unique = false;
         }else{
