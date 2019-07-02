@@ -19,9 +19,9 @@ class User extends CI_Model
         $is_unique;
         $query = $this->db->where('account', $user)->get('users');
         if($query->num_rows() > 0){
-            return $is_unique = false;
-        }else{
             return $is_unique = true;
+        }else{
+            return $is_unique = false;
         }
         return $is_unique;       
     }

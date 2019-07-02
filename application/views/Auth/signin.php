@@ -37,9 +37,9 @@ $CI->load->view('./layouts/header');?>
                         <div class="form-group">
                             <input class="form-control" type="password" name="pass" value="<?php echo set_value('pass'); ?>" required placeholder="Contraseña" autocomplete="off">
                         </div>
-                        <div class="form-group">
-                            <input class="form-control" type="password" name="confirm_pass" value="<?php echo set_value('confirm_pass'); ?>" required placeholder="Confirmar contraseña" autocomplete="off">
-                        </div>
+    <!--                     <div class="form-group">
+                            <input class="form-control" type="password" name="confirm_pass" value="<?php //echo set_value('confirm_pass'); ?>" required placeholder="Confirmar contraseña" autocomplete="off">
+                        </div> -->
                         <input class="btn btn-primary" type="submit" value="Crear cuenta">
                     </form>
     </div>
