@@ -13,16 +13,31 @@ $CI->load->view('./layouts/header');?>
           </button>
         </div>
         <?php } ?>
-                <form action="<?php echo base_url('Auth/login'); ?>" method="post">
-                        <div class="form-group">
-                            <input class="form-control input-lg" type="text" name="user" id="user" autofocus placeholder="Usuario" required autocomplete="off">
+            <form action="<?php echo base_url('Auth/login'); ?>" method="post">
+                <div class="col-auto">
+                    <label class="sr-only" for="account">Cuenta de usuario</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">@</div>
                         </div>
-                        <div class="form-group">
-                            <input class="form-control input-lg" type="password" name="pass" id="pass" placeholder="Contraseña" required autocomplete="off">
+                        <input class="form-control input-lg" id="account" type="text" name="user" autofocus placeholder="Usuario" required autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <label class="sr-only" for="account">Contraseña de usuario</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">#</div>
                         </div>
-                        <input class="btn btn-outline-primary" type="submit" value="Iniciar sesión">
-                        <a class="btn btn-outline-secondary" href="<?php echo base_url('Auth/signin'); ?>">Registrarse</a>
-                </form>
+                        <input class="form-control input-lg" id="pass" type="text" name="pass" autofocus placeholder="Contraseña" required autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <input class="btn btn-outline-primary" type="submit" value="Iniciar sesión">
+                    <a class="btn btn-outline-secondary" href="<?php echo base_url('Auth/signin'); ?>">Registrarse</a>
+                </div>
+               
+            </form>
     </div>
   </div>
 </div>

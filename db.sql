@@ -21,8 +21,9 @@ CREATE TABLE users(
     first_name VARCHAR(200) NOT NULL,
     last_name VARCHAR(200) NOT NULL,
     email VARCHAR(45) UNIQUE NOT NULL,
-    account VARCHAR(255) NOT NULL,
+    account VARCHAR(255) UNIQUE NOT NULL,
     pass VARCHAR(255) NOT NULL,
+    confirm_pass VARCHAR(255) NOT NULL,
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_level) REFERENCES levels(id_level)
 )ENGINE = INNODB
