@@ -45,7 +45,8 @@ class Auth extends CI_Controller {
             	$this->User->Add($_POST);
             	redirect(base_url('Auth'));
             }
-            redirect(base_url('Auth/signin'));
+            //redirect(base_url('Auth/signin'));
+            $this->load->view('Auth/signin', ['Error' => 'Ya existe una cuenta con este usuario.']);
         }
         redirect(base_url('Auth'));
     }

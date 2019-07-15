@@ -33,8 +33,8 @@ $CI->load->view('./layouts/header');?>
                     </div>
                 </div>
                 <div class="col-auto">
-                    <input class="btn btn-outline-primary" type="submit" value="Iniciar sesión">
-                    <a class="btn btn-outline-secondary" href="<?php echo base_url('Auth/signin'); ?>">Registrarse</a>
+                    <input class="btn btn-block btn-outline-primary" type="submit" value="Iniciar sesión">
+                    <a class="btn btn-block btn-outline-secondary" href="<?php echo base_url('Auth/signin'); ?>">Registrarse</a>
                 </div>
                
             </form>

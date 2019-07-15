@@ -27,7 +27,7 @@ $CI->load->view('./layouts/header');?>
                 </div>
                 <div class="form-group">
                     <input class="form-control" type="text" name="last_name" required placeholder="Apellidos" autocomplete="off">
-
+                </div>
                 <div class="form-group">
                     <input class="form-control" type="email" name="email" required placeholder="Correo" autocomplete="off">
                 </div>
