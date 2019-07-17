@@ -7,7 +7,6 @@ class Auth extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('url','form');
-        $this->load->library('form_validation');
         $this->load->library('session');
         $this->load->model('User');
         $this->load->model('Level');
@@ -33,22 +32,29 @@ class Auth extends CI_Controller {
 		// $this->form_validation->set_rules('password', 'current password', 'max_length[25]|min_length[5]|required');
 		// $this->form_validation->set_rules('new_password', 'new password', 'max_length[25]|min_length[5]|required|differs[password]');
 		// $this->form_validation->set_rules('confirm_password', 'confirm password', 'required|max_length[25]|min_length[5]|matches[new_password]');
-		
-		$this->form_validation->set_message('pass', 'Password', 'max_length[25]|min_length[5]|required');
-		$this->form_validation->set_message('confirm_pass', 'Confirm Password', 'required|max_length[25]|min_length[5]|matches[pass]');
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('pass', 'Password', 'max_length[25]|min_length[5]|required');
+		$this->form_validation->set_rules('confirm_pass', 'Confirm Password', 'required|max_length[25]|min_length[5]|matches[pass]', array('matches' => 'No coinciden las Contraseñas'));
         
-        if(!empty($_POST)){
-            if($this->User->Exists($_POST['account'])){
-      			$this->load->view('Auth/signin', ['Error' => 'Ya existe una cuenta con este usuario.']);
-            }else{
-            	$_POST['pass'] = md5($_POST['pass']);
-            	$this->User->Add($_POST);
-            	redirect(base_url('Auth'));
-            }
-            //redirect(base_url('Auth/signin'));
-            $this->load->view('Auth/signin', ['Error' => 'Ya existe una cuenta con este usuario.']);
-        }
-        redirect(base_url('Auth'));
+		if($this->form_validation->run() == False){
+			$this->load->view('Auth/signin');
+		}else{
+			redirect(base_url('Auth'));
+		}
+
+        // if(!empty($_POST)){
+        //     if($this->User->Exists($_POST['account'])){
+      		// 	$this->load->view('Auth/signin', ['Error' => 'Ya existe una cuenta con este usuario.']);
+        //     }else{
+        //     	$_POST['pass'] = md5($_POST['pass']);
+        //     	$this->User->Add($_POST);
+        //     	redirect(base_url('Auth'));
+        //     }
+        //     //redirect(base_url('Auth/signin'));
+        //     $this->load->view('Auth/signin', ['Error' => 'Ya existe una cuenta con este usuario.']);
+        // }
+        // redirect(base_url('Auth'));
     }
 
 	public function login()

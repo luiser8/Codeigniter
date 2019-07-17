@@ -5,15 +5,16 @@ $CI->load->view('./layouts/header');?>
 <div class="container" style="margin-top: 55px;">
   <div class="row">
     <div class="col-xs-4 col-xl-4 offset-xl-4 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
-         <?php if(isset($Error)){ ?>
+         <?php if(validation_errors()){ ?>
 	        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-	          <small><?php echo isset($Error) ? $Error : '';?></small>
+	          <small><?php echo validation_errors();?></small>
 	          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 	            <span aria-hidden="true">&times;</span>
 	          </button>
 	        </div>
         <?php } ?>
             <form action="<?php echo base_url('Auth/create'); ?>" method="post">
+                
                 <div class="form-group">
                     <select name="id_level" class="form-control" required>
                         <option>Selecciona un nivel</option>
