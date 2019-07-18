@@ -29,7 +29,7 @@ $CI->load->view('./layouts/header');?>
                         <div class="input-group-prepend">
                             <div class="input-group-text">#</div>
                         </div>
-                        <input class="form-control input-lg" id="pass" type="text" name="pass" autofocus placeholder="Contraseña" required autocomplete="off">
+                        <input class="form-control input-lg" id="pass" type="password" name="pass" autofocus placeholder="Contraseña" required autocomplete="off">
                     </div>
                 </div>
                 <div class="col-auto">
