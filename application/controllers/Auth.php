@@ -42,21 +42,15 @@ class Auth extends CI_Controller {
 		if($this->form_validation->run() == False){
 			$this->load->view('Auth/signin');
 		}else{
-			redirect(base_url('Auth'));
+			if(!empty($_POST)){
+	            $_POST['pass'] = md5($_POST['pass']);
+	            $_POST['confirm_pass'] = md5($_POST['confirm_pass']);
+	            $this->User->Add($_POST);
+	            redirect(base_url('Auth'));
+	            //redirect(base_url('Auth/signin'));
+	        }
 		}
-
-        // if(!empty($_POST)){
-        //     if($this->User->Exists($_POST['account'])){
-      		// 	$this->load->view('Auth/signin', ['Error' => 'Ya existe una cuenta con este usuario.']);
-        //     }else{
-        //     	$_POST['pass'] = md5($_POST['pass']);
-        //     	$this->User->Add($_POST);
-        //     	redirect(base_url('Auth'));
-        //     }
-        //     //redirect(base_url('Auth/signin'));
-        //     $this->load->view('Auth/signin', ['Error' => 'Ya existe una cuenta con este usuario.']);
-        // }
-        // redirect(base_url('Auth'));
+       //$this->load->view('Auth/signin');
     }
 
 	public function login()
