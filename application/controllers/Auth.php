@@ -34,6 +34,8 @@ class Auth extends CI_Controller {
 		// $this->form_validation->set_rules('confirm_password', 'confirm password', 'required|max_length[25]|min_length[5]|matches[new_password]');
 		$this->load->library('form_validation');
 
+		$this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]');
+		$this->form_validation->set_rules('account', 'Account', 'required|is_unique[users.account]');
 		$this->form_validation->set_rules('pass', 'Password', 'max_length[25]|min_length[5]|required');
 		$this->form_validation->set_rules('confirm_pass', 'Confirm Password', 'required|max_length[25]|min_length[5]|matches[pass]', array('matches' => 'No coinciden las Contraseñas'));
         
