@@ -6,7 +6,7 @@ class Auth extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
-        $this->load->helper('url','form');
+        $this->load->helper('url','form','email');
         $this->load->library('session');
         $this->load->model('User');
         $this->load->model('Level');
@@ -23,8 +23,7 @@ class Auth extends CI_Controller {
 
 	public function signin()
 	{
-		$levels = $this->Level->All();
-		$this->load->view('Auth/signin', ['Levels'=> $levels]);
+		$this->load->view('Auth/signin', ['Levels'=> $levels = $this->Level->All()]);
 	}
 
 	public function create()
@@ -33,21 +32,27 @@ class Auth extends CI_Controller {
 		// $this->form_validation->set_rules('new_password', 'new password', 'max_length[25]|min_length[5]|required|differs[password]');
 		// $this->form_validation->set_rules('confirm_password', 'confirm password', 'required|max_length[25]|min_length[5]|matches[new_password]');
 		$this->load->library('form_validation');
-
-		$this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]');
-		$this->form_validation->set_rules('account', 'Account', 'required|is_unique[users.account]');
-		$this->form_validation->set_rules('pass', 'Password', 'max_length[25]|min_length[5]|required');
-		$this->form_validation->set_rules('confirm_pass', 'Confirm Password', 'required|max_length[25]|min_length[5]|matches[pass]', array('matches' => 'No coinciden las Contraseñas'));
+		$this->form_validation->set_rules('id_level', 'Level', 'trim|required', array('matches' => 'Debes seleccionar un nivel'));
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]', 
+			array('matches' => 'Debes colocar una cuenta de correo', 
+					'is_unique' => 'Ya esta registrado este email', 
+					'valid_email'=> 'Email invalido'));
+		$this->form_validation->set_rules('account', 'Account', 'trim|required|is_unique[users.account]', 
+			array('matches' => 'Debes colocar una contraseña'));
+		$this->form_validation->set_rules('pass', 'Password', 'max_length[25]|min_length[5]|trim|required', 
+			array('matches' => 'Debes colocar la confirmacion de contraseña'));
+		$this->form_validation->set_rules('confirm_pass', 'Confirm Password', 'trim|required|max_length[25]|min_length[5]|matches[pass]', 
+			array('required' => 'Debes colocar la confirmacion de contraseña', 
+					'matches' => 'No coinciden las contraseñas'));
         
 		if($this->form_validation->run() == False){
-			$this->load->view('Auth/signin');
+			$this->load->view('Auth/signin', ['Levels'=> $levels = $this->Level->All()]);
 		}else{
 			if(!empty($_POST)){
 	            $_POST['pass'] = md5($_POST['pass']);
 	            $_POST['confirm_pass'] = md5($_POST['confirm_pass']);
 	            $this->User->Add($_POST);
 	            redirect(base_url('Auth'));
-	            //redirect(base_url('Auth/signin'));
 	        }
 		}
        //$this->load->view('Auth/signin');

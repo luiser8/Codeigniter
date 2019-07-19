@@ -16,7 +16,7 @@ $CI->load->view('./layouts/header');?>
             <form action="<?php echo base_url('Auth/create'); ?>" method="post">
                 
                 <div class="form-group">
-                    <select name="id_level" class="form-control" required>
+                    <select name="id_level" class="form-control">
                         <option>Selecciona un nivel</option>
                         <?php foreach ($Levels as $level):?>
                             <option value="<?php echo $level['id_level']; ?>"><?php echo $level['name']; ?></option>
@@ -24,22 +24,22 @@ $CI->load->view('./layouts/header');?>
                     </select>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="first_name" required placeholder="Nombres" autocomplete="off">
+                    <input class="form-control" type="text" name="first_name" value="<?php echo set_value('first_name'); ?>" placeholder="Nombres" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="last_name" required placeholder="Apellidos" autocomplete="off">
+                    <input class="form-control" type="text" name="last_name" value="<?php echo set_value('last_name'); ?>" placeholder="Apellidos" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="email" name="email" required placeholder="Correo" autocomplete="off">
+                    <input class="form-control" type="email" name="email" placeholder="Correo" value="<?php echo set_value('email'); ?>" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="account" required placeholder="Cuenta" autocomplete="off">
+                    <input class="form-control" type="text" name="account" value="<?php echo set_value('account'); ?>" placeholder="Cuenta" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="password" name="pass" value="<?php echo set_value('pass'); ?>" required placeholder="Contraseña" autocomplete="off">
+                    <input class="form-control" type="password" name="pass" value="<?php echo set_value('pass'); ?>" placeholder="Contraseña" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="password" name="confirm_pass" value="<?php //echo set_value('confirm_pass'); ?>" required placeholder="Confirmar contraseña" autocomplete="off">
+                    <input class="form-control" type="password" name="confirm_pass" value="<?php //echo set_value('confirm_pass'); ?>" placeholder="Confirmar contraseña" autocomplete="off">
                 </div>
                 <input class="btn btn-outline-primary" type="submit" value="Crear cuenta">
                 <a class="btn btn-outline-secondary" href="<?php echo base_url('Auth'); ?>">Cancelar</a>
