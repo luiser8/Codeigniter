@@ -10,10 +10,17 @@ class Auth extends CI_Controller {
         $this->load->library('session');
         $this->load->model('User');
         $this->load->model('Level');
+
+		if($this->verify_admin_level()){
+            redirect(base_url('Dashboard'));
+        }
     }
 
 	private function verify_admin_level(){
-        return $this->session->userdata("islogin");
+        if($this->session->userdata("islogin") == TRUE){
+
+        }
+        //return $this->session->userdata("islogin");
     }
 
 	public function index()
