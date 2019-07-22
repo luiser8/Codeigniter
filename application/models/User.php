@@ -35,10 +35,16 @@ class User extends CI_Model
         return $query->result_array();
     }
     
-    public function Check($user)
+    public function Check($tipo, $user, $pass)
     {
-        $where = array('account ' => $user['user'] , 'pass ' => md5($user['pass']));
-        $query = $this->db->where($where)->get('users');;
+        if($pass === ''){
+            $where = array($tipo => $user);
+            $query = $this->db->where($where)->get('users');
+        }else{
+            $where = array($tipo => $user, 'pass' => md5($pass));
+            $query = $this->db->where($where)->get('users');
+        }
+       
         return $query->row_array();
     }
 

@@ -15,14 +15,14 @@ $CI->load->view('./layouts/header');?>
         <?php } ?>
             <form action="<?php echo base_url('Auth/create'); ?>" method="post">
                 
-                <div class="form-group">
+<!--                 <div class="form-group">
                     <select name="id_level" class="form-control">
                         <option>Selecciona un nivel</option>
                         <?php foreach ($Levels as $level):?>
                             <option value="<?php echo $level['id_level']; ?>"><?php echo $level['name']; ?></option>
                         <?php endforeach ?>
                     </select>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <input class="form-control" type="text" name="first_name" value="<?php echo set_value('first_name'); ?>" placeholder="Nombres" autocomplete="off">
                 </div>
